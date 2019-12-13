@@ -1,2 +1,2 @@
 # spring-boot-api-sample
-SpringBootAPIサンプル
+SpringBoot翻訳APIサンプル
