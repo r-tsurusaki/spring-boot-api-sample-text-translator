@@ -1,0 +1,10 @@
+config:
+  api:
+    translator-text-api:
+      api-version: 3.0
+      subscription-key: ${TRANSLATOR_TEXT_API_SUBSCRIPTION_KEY}
+      endpoint: https://api.cognitive.microsofttranslator.com
+swagger:
+  title: 翻訳APIサンプル
+  description: 説明
+  version: 0.01
