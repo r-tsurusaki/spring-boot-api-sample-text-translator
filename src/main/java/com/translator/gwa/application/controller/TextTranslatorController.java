@@ -45,7 +45,7 @@ public class TextTranslatorController {
                 .message("done!")
                 .translatorResponseDataList(this.textTranslatorService.textTranslator(
                         textTranslatorRequest.getTranslatorTexts(), textTranslatorRequest.getToLanguageCodes()))
-//                .requestId(httpServletRequest.getAttribute("requestId").toString())
+                .requestId(httpServletRequest.getAttribute("requestId").toString())
                 .build();
     }
 }
