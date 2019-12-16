@@ -24,6 +24,7 @@ Translator Text APIを使用した、SpringBootのRestAPIのAPIサンプルで�
 |:-----|:---------|:-----------------------------------|
 | Text | String[] | 翻訳したい文字列を配列で設定します。 |
 | to   | String[] | 翻訳したい言語コードを配列で指定します。 |
+
 ※言語コードについては[こちら](https://github.com/r-tsurusaki/spring-boot-api-sample-text-translator/blob/develop/src/main/java/com/translator/gwa/application/contents/LanguageCode.java)を参照。
 
 ## レスポンスパラメータ
