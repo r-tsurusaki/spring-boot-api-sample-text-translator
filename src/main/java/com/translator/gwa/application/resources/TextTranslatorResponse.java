@@ -11,8 +11,6 @@ import java.util.List;
 @Getter
 public class TextTranslatorResponse {
 
-    private String message;
-    private String requestId;
     @JsonProperty("data")
     private List<TranslatorResponseData> translatorResponseDataList;
 }

@@ -1,7 +1,8 @@
 package com.translator.gwa.application.controller;
 
-import com.translator.gwa.application.resources.TextTranslatorResponse;
+import com.translator.gwa.application.resources.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,9 +36,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
             errorMessages.add(fieldError.getDefaultMessage());
         }
 
-        TextTranslatorResponse response = TextTranslatorResponse.builder()
+        ErrorResponse response = ErrorResponse.builder()
+                .xTrack(this.getXTrack())
                 .message(String.join(",", errorMessages))
-                .requestId(this.getRequestId(request))
                 .build();
 
         return super.handleExceptionInternal(exception, response, headers, status, request);
@@ -55,9 +56,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
         log.error(exception.getMessage());
 
-        TextTranslatorResponse response = TextTranslatorResponse.builder()
+        ErrorResponse response = ErrorResponse.builder()
+                .xTrack(this.getXTrack())
                 .message(exception.getMessage())
-                .requestId(this.getRequestId(request))
                 .build();
 
         return super.handleExceptionInternal(
@@ -65,14 +66,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * Get requestId.
+     * Get X-Track.
      *
-     * @param request WebRequest Object.
-     * @return requestId
+     * @return X-Track Str.
      */
-    @SuppressWarnings("ConstantConditions")
-    private String getRequestId(WebRequest request) {
-
-        return request.getAttribute("requestId", 0).toString();
+    private String getXTrack() {
+        return MDC.get("X-Track");
     }
 }

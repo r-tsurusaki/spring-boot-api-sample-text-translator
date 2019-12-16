@@ -75,7 +75,9 @@ class TextTranslatorServiceTest {
             fail("Successful completion.");
 
         } catch (Exception exception) {
+
             // 結果検証
+            assertEquals(errorMessage, exception.getMessage());
             verify(this.translatorRepository, times(1)).translator(any(), any());
         }
     }

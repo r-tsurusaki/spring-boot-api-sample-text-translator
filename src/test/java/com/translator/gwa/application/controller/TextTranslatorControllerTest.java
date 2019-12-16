@@ -6,18 +6,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.translator.gwa.application.resources.TextTranslatorRequest;
 import com.translator.gwa.domain.service.TextTranslatorService;
 import com.translator.gwa.infrastructure.entity.TranslatorResponseData;
-import org.junit.jupiter.api.BeforeEach;
+import com.translator.gwa.infrastructure.repository.TranslatorRepositoryImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,30 +27,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
-@WebAppConfiguration
-@SpringBootTest
+@WebMvcTest(TextTranslatorController.class)
 class TextTranslatorControllerTest {
 
+    @Autowired
     private MockMvc mockMvc;
 
-    @InjectMocks
-    private TextTranslatorController textTranslatorController;
-
-    @Mock
+    @MockBean
     private TextTranslatorService textTranslatorService;
+    @MockBean
+    private TranslatorRepositoryImpl translatorRepository;
 
     private static final String ENDPOINT = "/text-translator";
 
-    @BeforeEach
-    void setup() {
-
-        this.mockMvc = MockMvcBuilders.standaloneSetup(this.textTranslatorController).build();
-    }
-
     @Test
     void textTranslator() throws Exception {
-
-        // TODO tracerがnullになる
 
         // リクエストパラメータ
         ObjectMapper mapper = new ObjectMapper();
@@ -76,7 +65,6 @@ class TextTranslatorControllerTest {
                 .content(json))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("message", is("done!")))
                 .andExpect(jsonPath("data[0].text", is("テスト")))
                 .andExpect(jsonPath("data[0].to", is("jp")));
     }
