@@ -1,5 +1,6 @@
 package com.translator.gwa.domain.service;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.translator.gwa.application.resources.TextTranslatorRequest;
@@ -55,10 +56,10 @@ class TextTranslatorServiceTest {
                 this.textTranslatorRequest.getTranslatorTexts(), this.textTranslatorRequest.getToLanguageCodes());
 
         // 結果検証
-        assertEquals(mockResponse.size(), actual.size());
-        assertEquals(mockResponse.get(0).getText(), actual.get(0).getText());
-        assertEquals(mockResponse.get(0).getTo(), actual.get(0).getTo());
-        verify(this.translatorRepository, times(1)).translator(any(), any());
+        assertAll(() -> assertEquals(mockResponse.size(), actual.size()),
+                () -> assertEquals(mockResponse.get(0).getText(), actual.get(0).getText()),
+                () -> assertEquals(mockResponse.get(0).getTo(), actual.get(0).getTo()),
+                () -> verify(this.translatorRepository, times(1)).translator(any(), any()));
     }
 
     @Test
@@ -77,8 +78,9 @@ class TextTranslatorServiceTest {
         } catch (Exception exception) {
 
             // 結果検証
-            assertEquals(errorMessage, exception.getMessage());
-            verify(this.translatorRepository, times(1)).translator(any(), any());
+            assertAll(
+                    () -> assertEquals(errorMessage, exception.getMessage()),
+                    () -> verify(this.translatorRepository, times(1)).translator(any(), any()));
         }
     }
 }
