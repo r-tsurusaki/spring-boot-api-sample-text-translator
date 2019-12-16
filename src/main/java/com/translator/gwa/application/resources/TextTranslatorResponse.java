@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 public class TextTranslatorResponse {
 
+    private String xTrack;
     @JsonProperty("data")
     private List<TranslatorResponseData> translatorResponseDataList;
 }

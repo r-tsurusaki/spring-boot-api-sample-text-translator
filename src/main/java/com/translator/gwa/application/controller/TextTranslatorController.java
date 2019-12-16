@@ -4,7 +4,7 @@ import com.translator.gwa.application.resources.TextTranslatorRequest;
 import com.translator.gwa.application.resources.TextTranslatorResponse;
 
 import com.translator.gwa.domain.service.TextTranslatorService;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-@Slf4j
 @RestController
 public class TextTranslatorController {
 
@@ -41,6 +40,7 @@ public class TextTranslatorController {
             throws Exception {
 
         return TextTranslatorResponse.builder()
+                .xTrack(MDC.get("X-Track"))
                 .translatorResponseDataList(this.textTranslatorService.textTranslator(
                         textTranslatorRequest.getTranslatorTexts(), textTranslatorRequest.getToLanguageCodes()))
                 .build();
