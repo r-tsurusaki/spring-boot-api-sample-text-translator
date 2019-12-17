@@ -12,7 +12,6 @@ import java.util.regex.Pattern;
 public class XTrackMDCPutFilter extends AbstractMDCPutFilter {
 
     private static final Pattern UUID_REPLACE_PATTERN = Pattern.compile("-");
-
     private static final String ATTRIBUTE_NAME = "X-Track";
 
     /**
