@@ -15,7 +15,6 @@ Translator Text APIを使用した、SpringBootのRESTfulAPIのAPIサンプル�
    
 4. Spring Bootアプリケーションを起動する。
 5. http://localhost:8080/swagger-ui.html にアクセスする。
-
    Swagger2を実装しているので上記からUIで実行できる。
    
 # I/F仕様
