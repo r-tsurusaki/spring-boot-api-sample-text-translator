@@ -18,9 +18,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ConfigurationProperties(prefix = "swagger")
 public class SwaggerConfig {
 
-    private String title = "タイトル";
-    private String description = "説明";
-    private String version = "0.01";
+    private String title;
+    private String description;
+    private String version;
 
     /**
      * Create swagger docket.
@@ -50,4 +50,6 @@ public class SwaggerConfig {
                 .version(this.version)
                 .build();
     }
+
+
 }
