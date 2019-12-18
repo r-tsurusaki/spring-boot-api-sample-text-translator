@@ -1,4 +1,4 @@
-# spring-boot-api-sample
+# spring-boot-api-sample-text-translator
 Translator Text APIを使用した、SpringBootのRESTfulAPIのAPIサンプルです。
 
 リクエストパラメータの言語を自動検出して、指定した言語へ翻訳します。
